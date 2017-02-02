@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+if [[ "$REQUEST_METHOD" = "POST" ]];then
+html="$(cat << EndOfText
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title></title></head>
+<body>
+<h2> POST in TWO</h2>
+</body></html>
+EndOfText
+)"
+  echo_response_status_line
+  echo_response_default_headers
+  echo -e "Content-Type: text/html; charset=utf-8\r"
+  echo -e "Content-Length: ${#html}\r"
+  echo -e "\r"
+
+  echo "${html}"
+
+elif [[ "$REQUEST_METHOD" = "GET" ]];then
+
+html="$(cat << EndOfText
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title></title></head>
+<body>
+<form action="/bss_script_examples/one" method="POST" target="_blank">
+  <fieldset>
+    <legend>input TWO</legend>
+    <input type="text" name="field1">
+    <br/>
+    <input type="submit">
+  </fieldset>
+</form>
+</body></html>
+EndOfText
+)"
+
+  echo_response_status_line
+  echo_response_default_headers
+  echo -e "Content-Type: text/html; charset=utf-8\r"
+  echo -e "Content-Length: ${#html}\r"
+  echo -e "\r"
+
+  echo "${html}"
+fi
+
